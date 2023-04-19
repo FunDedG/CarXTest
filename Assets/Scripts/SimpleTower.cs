@@ -23,12 +23,7 @@ public class SimpleTower : MonoBehaviour
                 continue;
 
             // shot
-            var projectile =
-                Instantiate(
-                    m_projectilePrefab,
-                    transform.position + Vector3.up * 1.5f,
-                    Quaternion.identity
-                ) as GameObject;
+            var projectile = Instantiate(m_projectilePrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity) as GameObject;
             var projectileBeh = projectile.GetComponent<GuidedProjectile>();
             projectileBeh.m_target = monster.gameObject;
 
