@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
+using System.Collections;
+
 namespace TestJob
 {
-	public class SimpleTower : MonoBehaviour
+	public class CannonTowerOld : MonoBehaviour
 	{
 		public float m_shootInterval = 0.5f;
 		public float m_range = 4f;
 		public GameObject m_projectilePrefab;
+		public Transform m_shootPoint;
 
 		private float m_lastShotTime = -0.5f;
 
 		void Update()
 		{
-			if (m_projectilePrefab == null)
+			if (m_projectilePrefab == null || m_shootPoint == null)
 				return;
 
 			foreach (var monster in FindObjectsOfType<Monster>())
@@ -23,9 +26,7 @@ namespace TestJob
 					continue;
 
 				// shot
-				var projectile = Instantiate(m_projectilePrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity) as GameObject;
-				var projectileBeh = projectile.GetComponent<GuidedProjectile>();
-				projectileBeh.m_target = monster.gameObject;
+				Instantiate(m_projectilePrefab, m_shootPoint.position, m_shootPoint.rotation);
 
 				m_lastShotTime = Time.time;
 			}
