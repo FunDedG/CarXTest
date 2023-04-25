@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class Monster : MonoBehaviour
+	public class Enemy : MonoBehaviour
 	{
 		public GameObject m_moveTarget;
 		public float m_speed = 0.01f;

@@ -14,7 +14,7 @@ namespace TestJob
 			if (m_projectilePrefab == null)
 				return;
 
-			foreach (var monster in FindObjectsOfType<Monster>())
+			foreach (var monster in FindObjectsOfType<Enemy>())
 			{
 				if (Vector3.Distance(transform.position, monster.transform.position) > m_range)
 					continue;
