@@ -6,16 +6,16 @@ namespace TestJob
 {
     public class RotationComponent : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        [SerializeField] private Transform target;
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-        
+            if (target != null)
+            {
+                Vector3 targetDirection = target.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            }
         }
     }
 }
