@@ -1,28 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CannonProjectile : MonoBehaviour
+namespace TestJob
 {
-    public float m_speed = 0.2f;
-    public int m_damage = 10;
-
-    void Update()
+    public class CannonProjectile : MonoBehaviour
     {
-        var translation = transform.forward * m_speed;
-        transform.Translate(translation);
-    }
+        private float m_speed;
+        private float m_damage;
 
-    void OnTriggerEnter(Collider other)
-    {
-        var monster = other.gameObject.GetComponent<Monster>();
-        if (monster == null)
-            return;
-
-        monster.m_hp -= m_damage;
-        if (monster.m_hp <= 0)
+        public void Init(float speed, float damage)
         {
-            Destroy(monster.gameObject);
+            m_speed = speed;
+            m_damage = damage;
         }
-        Destroy(gameObject);
+
+        private void Update()
+        {
+            Move();
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            var monster = other.gameObject.GetComponent<Enemy>();
+            if (monster == null)
+                return;
+
+            monster.m_hp -= m_damage;
+            if (monster.m_hp <= 0)
+            {
+                Destroy(monster.gameObject);
+            }
+            Destroy(gameObject);
+        }
+
+        private void Move()
+        {
+            transform.Translate(Vector3.forward * m_speed * Time.deltaTime);
+        }
     }
 }
