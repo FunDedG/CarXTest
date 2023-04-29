@@ -5,9 +5,9 @@ namespace TestJob
 	{
 		public GameObject m_moveTarget;
 		public float m_speed = 0.01f;
-		public int m_maxHP = 30;
+		public float m_maxHP = 30f;
 		const float m_reachDistance = 0.3f;
-		public int m_hp;
+		public float m_hp;
 
 		void Start()
 		{

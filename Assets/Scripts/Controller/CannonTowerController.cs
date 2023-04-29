@@ -15,12 +15,15 @@ namespace TestJob
             m_rotationComponent.Init(towerData);
         }
 
-        public override void Attack()
-        {
-			
+		public override void Attack()
+		{
+			if (searchEnemyComponent.GetTarget())
+			{
+				attackComponent.Attack(searchEnemyComponent.GetTarget());
+			}
 		}
 
-        public void RotateTower()
+		public void RotateTower()
         {
             if (searchEnemyComponent.GetTarget())
 			{
@@ -38,6 +41,7 @@ namespace TestJob
         public void Update()
         {
 			RotateTower();
+			Attack();
 		}
     }
 }

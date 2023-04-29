@@ -9,6 +9,7 @@ namespace TestJob
 		public SearchEnemyComponent searchEnemyComponent;
 		public SphereCollider sphereCollider;
 		public GameObject projectilePosition;
+		public GameObject projectilePrefab;
 
 		public virtual void Start()
 		{
@@ -16,7 +17,7 @@ namespace TestJob
 			searchEnemyComponent = GetComponent<SearchEnemyComponent>();
 			sphereCollider = GetComponent<SphereCollider>();
 			sphereCollider.radius = towerData.range;
-			attackComponent.Init(towerData);
+			attackComponent.Init(towerData, projectilePosition, projectilePrefab);
 			searchEnemyComponent.Init(towerData);
 		}
 
