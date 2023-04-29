@@ -6,16 +6,23 @@ namespace TestJob
 {
     public class RotationComponent : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        private GameObject m_target;
+		private float m_rotationSpeed;
 
-        private void Update()
-        {
-            if (target != null)
+		public void Init(TowerData towerData)
+		{
+			m_rotationSpeed = towerData.rotationSpeed;
+		}
+
+		public void Rotate(GameObject target)
+		{
+			m_target = target;
+			if (m_target != null)
             {
-                Vector3 targetDirection = target.position - transform.position;
+                Vector3 targetDirection = m_target.transform.position - transform.position;
                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-                //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
             }
-        }
+		}
     }
 }

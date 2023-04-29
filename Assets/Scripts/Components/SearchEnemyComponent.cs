@@ -38,11 +38,14 @@ namespace TestJob
 
 			foreach (GameObject enemy in enemiesInRange)
 			{
-				float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-				if (distanceToEnemy <= m_radius && distanceToEnemy < minDistance)
+				if (enemy != null)
 				{
-					minDistance = distanceToEnemy;
-					closestEnemy = enemy;
+					float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+					if (distanceToEnemy <= m_radius && distanceToEnemy < minDistance)
+					{
+						minDistance = distanceToEnemy;
+						closestEnemy = enemy;
+					}
 				}
 			}
 			return closestEnemy;

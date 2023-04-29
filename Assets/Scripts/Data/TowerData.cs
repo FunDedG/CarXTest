@@ -8,5 +8,7 @@ namespace TestJob
 		public float range;
 		public float damage;
 		public float shootInterval;
+		public float rotationSpeed;
+		public float projectileSpeed;
 	}
 }
