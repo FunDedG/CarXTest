@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace TestJob
 {
-	public class CannonTower : TowerBehaviour, IRotation
+	public class CannonTowerController : TowerBehaviour, IRotation
 	{
 		private RotationComponent m_rotationComponent;
 		public override void Start()
