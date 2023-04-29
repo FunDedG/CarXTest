@@ -8,6 +8,7 @@ namespace TestJob
 		public AttackComponent attackComponent;
 		public SearchEnemyComponent searchEnemyComponent;
 		public SphereCollider sphereCollider;
+		public GameObject projectilePosition;
 
 		public virtual void Start()
 		{

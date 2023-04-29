@@ -10,6 +10,6 @@ namespace TestJob
 	}
 	public interface IRotation
 	{
-		public void Rotate();
+		public void RotateTower();
 	}
 }
