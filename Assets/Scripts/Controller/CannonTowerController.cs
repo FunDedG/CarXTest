@@ -33,7 +33,7 @@ namespace TestJob
 					searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
 					towerData.projectileSpeed
 				);
-				Debug.Log(predictedPosition);
+				//Debug.Log(predictedPosition);
 				m_rotationComponent.Rotate(predictedPosition);
 			}
         }

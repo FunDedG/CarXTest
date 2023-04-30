@@ -10,8 +10,8 @@ namespace TestJob
 		private float m_attackInterval;
 		private GameObject m_projectilePrefab;
 		private GameObject m_projectileStartPosition;
-		private float damage;
-		private float speed;
+		private float m_damage;
+		private float m_speed;
 	
 		private void Start()
     	{
@@ -19,8 +19,8 @@ namespace TestJob
     	}
 		public void Init(TowerData towerData, GameObject projectileStartPosition, GameObject projectilePrefab)
 		{
-			damage = towerData.damage;
-			speed = towerData.projectileSpeed;
+			m_damage = towerData.damage;
+			m_speed = towerData.projectileSpeed;
 			m_attackInterval = towerData.shootInterval;
 			m_projectileStartPosition = projectileStartPosition;
 			m_projectilePrefab = projectilePrefab;
@@ -30,13 +30,12 @@ namespace TestJob
 		{
 			if (target == null) return;
 
-			// Проверяем, прошло ли достаточно времени с последней атаки
 			if (Time.time - m_lastAttackTime < m_attackInterval) return;
 
-			// Создаем новый экземпляр снаряда и передаем ему данные
 			GameObject newProjectile = Instantiate(m_projectilePrefab, m_projectileStartPosition.transform.position, Quaternion.identity);
+			newProjectile.transform.rotation = transform.rotation;
 			CannonProjectile projectileBehaviour = newProjectile.GetComponent<CannonProjectile>();
-			projectileBehaviour.Init(speed, damage);
+			projectileBehaviour.Init(m_speed, m_damage);
 
 			m_lastAttackTime = Time.time;
 		}

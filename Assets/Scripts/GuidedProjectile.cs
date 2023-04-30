@@ -29,8 +29,8 @@ namespace TestJob
 			if (monster == null)
 				return;
 
-			monster.m_hp -= m_damage;
-			if (monster.m_hp <= 0)
+			monster.hp -= m_damage;
+			if (monster.hp <= 0)
 			{
 				Destroy(monster.gameObject);
 			}

@@ -18,7 +18,6 @@ namespace TestJob
         {
             if (other.CompareTag("Enemy"))
             {
-				Debug.Log("Enemies in range");
 				enemiesInRange.Add(other.gameObject);
             }
         }
@@ -27,7 +26,6 @@ namespace TestJob
         {
             if (other.CompareTag("Enemy"))
             {
-				Debug.Log("Enemies dont in range");
                 enemiesInRange.Remove(other.gameObject);
             }
         }
