@@ -34,8 +34,8 @@ namespace TestJob
 
 			GameObject newProjectile = Instantiate(m_projectilePrefab, m_projectileStartPosition.transform.position, Quaternion.identity);
 			newProjectile.transform.rotation = transform.rotation;
-			CannonProjectile projectileBehaviour = newProjectile.GetComponent<CannonProjectile>();
-			projectileBehaviour.Init(m_speed, m_damage);
+			CannonProjectile cannonProjectile = newProjectile.GetComponent<CannonProjectile>();
+			cannonProjectile.Init(m_speed, m_damage);
 
 			m_lastAttackTime = Time.time;
 		}

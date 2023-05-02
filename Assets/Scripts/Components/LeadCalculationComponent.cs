@@ -6,30 +6,6 @@ namespace TestJob
 {
     public class LeadCalculationComponent : MonoBehaviour
     {
-		public float CalculateTimeToHit(GameObject target, float projectileSpeed)
-        {
-            Vector3 targetVelocity = target.GetComponent<Rigidbody>().velocity;
-            Vector3 targetPosition = target.transform.position;
-            Vector3 projectilePosition = transform.position;
-            float distance = Vector3.Distance(targetPosition, projectilePosition);
-
-            // Расстояние, которое пройдет цель за время, необходимое снаряду для достижения ее
-            float targetDistance = targetVelocity.magnitude * distance / (projectileSpeed - targetVelocity.magnitude);
-
-            // Время, необходимое снаряду для достижения цели
-            float timeToHit = targetDistance / projectileSpeed;
-
-            return timeToHit;
-        }
-
-        public Vector3 AimAtMovingTarget(GameObject target, float timeToHit)
-        {
-            Vector3 targetVelocity = target.GetComponent<Rigidbody>().velocity;
-			Debug.Log(targetVelocity);
-			Vector3 targetFuturePosition = target.transform.position + targetVelocity * timeToHit;
-
-			return targetFuturePosition;
-		}
 		public static Vector3 PredictLinear(Vector3 shooterPosition, Vector3 targetPosition, Vector3 targetVelocity, float projectileSpeed)
 		{
 			Vector3 targetDirection = targetPosition - shooterPosition;
