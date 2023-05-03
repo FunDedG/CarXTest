@@ -3,34 +3,33 @@ namespace TestJob
 {
 	public class Enemy : MonoBehaviour
 	{
-		public GameObject m_moveTarget;
-		public float m_speed = 0.01f;
-		public float m_maxHP = 30f;
+		private Rigidbody m_rb;
+		public Transform moveTarget;
+		public float speed = 5f;
+		public float maxHP = 30f;
+		public float hp;
+
 		const float m_reachDistance = 0.3f;
-		public float m_hp;
 
 		void Start()
 		{
-			m_hp = m_maxHP;
+			hp = maxHP;
+			m_rb = GetComponent<Rigidbody>();
 		}
 
-		void Update()
+		void FixedUpdate()
 		{
-			if (m_moveTarget == null)
+			if (moveTarget == null)
 				return;
 
-			if (Vector3.Distance(transform.position, m_moveTarget.transform.position) <= m_reachDistance)
+			if (Vector3.Distance(transform.position, moveTarget.position) <= m_reachDistance)
 			{
 				Destroy(gameObject);
 				return;
 			}
 
-			var translation = m_moveTarget.transform.position - transform.position;
-			if (translation.magnitude > m_speed)
-			{
-				translation = translation.normalized * m_speed;
-			}
-			transform.Translate(translation);
+			Vector3 direction = moveTarget.position - transform.position;
+			m_rb.velocity = direction.normalized * speed;
 		}
 	}
 }

@@ -7,6 +7,12 @@ namespace TestJob
     {
         private float m_speed;
         private float m_damage;
+		private Vector3 m_direction;
+
+		private void Start()
+		{
+			m_direction = Vector3.forward * m_speed;
+		}
 
         public void Init(float speed, float damage)
         {
@@ -25,8 +31,8 @@ namespace TestJob
             if (monster == null)
                 return;
 
-            monster.m_hp -= m_damage;
-            if (monster.m_hp <= 0)
+            monster.hp -= m_damage;
+            if (monster.hp <= 0)
             {
                 Destroy(monster.gameObject);
             }
@@ -35,7 +41,7 @@ namespace TestJob
 
         private void Move()
         {
-            transform.Translate(Vector3.forward * m_speed * Time.deltaTime);
+            transform.Translate(m_direction * Time.deltaTime);
         }
     }
 }
