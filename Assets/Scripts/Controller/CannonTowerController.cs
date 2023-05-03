@@ -27,13 +27,12 @@ namespace TestJob
         {
             if (searchEnemyComponent.GetTarget())
 			{
-				Vector3 predictedPosition = LeadCalculationComponent.Predict(
+				Vector3 predictedPosition = LeadCalculationComponent.PredictQuadratic(
 					projectilePosition.transform.position,
 					searchEnemyComponent.GetTarget().transform.position,
 					searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
 					towerData.projectileSpeed
 				);
-				//Debug.Log(predictedPosition);
 				m_rotationComponent.Rotate(predictedPosition);
 			}
         }

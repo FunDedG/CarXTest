@@ -17,10 +17,10 @@ namespace TestJob
         public void Rotate(Vector3 target)
         {
             m_target = target;
-            if (m_target != null)
+            if (m_target.magnitude > 0)
             {
                 Vector3 targetDirection = m_target - transform.position;
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+				Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
                     targetRotation,
@@ -28,5 +28,5 @@ namespace TestJob
                 );
             }
         }
-    }
+	}
 }
