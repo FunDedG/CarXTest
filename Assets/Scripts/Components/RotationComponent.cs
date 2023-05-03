@@ -19,8 +19,8 @@ namespace TestJob
         public void RotateVertical(Vector3 target)
         {
             Vector3 targetVertical = new Vector3(target.x, 0, target.z).normalized;
-            float verticalAngle = Vector3.Angle(targetVertical, target);
-            Quaternion verticalRotation = Quaternion.Euler(verticalAngle, 0f, 0f);
+            float angleRotation = Vector3.Angle(targetVertical, target);
+            Quaternion verticalRotation = Quaternion.Euler(angleRotation, 0f, 0f);
             m_gun.transform.localRotation = Quaternion.RotateTowards(
                 m_gun.transform.localRotation,
                 verticalRotation,
@@ -44,16 +44,8 @@ namespace TestJob
             m_target = target;
             if (m_target.magnitude > 0)
             {
-
 				RotateVertical(target);
 				RotateHorizontal(target);
-				// Vector3 targetDirection = m_target - transform.position;
-				// Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-				// transform.rotation = Quaternion.RotateTowards(
-				//     transform.rotation,
-				//     targetRotation,
-				//     Time.deltaTime * m_rotationSpeed
-				// );
 			}
         }
     }

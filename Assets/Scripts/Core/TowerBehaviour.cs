@@ -20,7 +20,16 @@ namespace TestJob
 			attackComponent.Init(towerData, projectilePosition, projectilePrefab);
 			searchEnemyComponent.Init(towerData);
 		}
-
-		public abstract void Attack();
+		public virtual void Attack()
+		{
+			if (searchEnemyComponent.GetTarget())
+			{
+				attackComponent.Attack(searchEnemyComponent.GetTarget());
+			}
+		}
+		public virtual void Update()
+		{
+			Attack();
+		}
 	}
 }
