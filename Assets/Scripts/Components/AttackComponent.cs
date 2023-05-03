@@ -33,7 +33,7 @@ namespace TestJob
 			if (Time.time - m_lastAttackTime < m_attackInterval) return;
 
 			GameObject newProjectile = Instantiate(m_projectilePrefab, m_projectileStartPosition.transform.position, Quaternion.identity);
-			newProjectile.transform.rotation = transform.rotation;
+			newProjectile.transform.rotation = m_projectileStartPosition.transform.rotation;
 			CannonProjectile cannonProjectile = newProjectile.GetComponent<CannonProjectile>();
 			cannonProjectile.Init(m_speed, m_damage);
 
