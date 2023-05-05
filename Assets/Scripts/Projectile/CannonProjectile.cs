@@ -3,43 +3,32 @@ using System.Collections;
 
 namespace TestJob
 {
-    public class CannonProjectile : MonoBehaviour, IProjectileInit
+    public class CannonProjectile : ProjectileBehavior, IProjectileInit
     {
-        private float m_speed;
-        private float m_damage;
 		private Vector3 m_direction;
 
 		private void Start()
 		{
-			m_direction = Vector3.forward * m_speed;
+			m_direction = Vector3.forward * speed;
 		}
 
         public void Init(float speed, float damage, GameObject target)
         {
-            m_speed = speed;
-            m_damage = damage;
+            this.speed = speed;
+            this.damage = damage;
         }
 
-        private void Update()
+        public override void Update()
         {
-            Move();
+            base.Update();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public override void OnTriggerEnter(Collider other)
         {
-            var monster = other.gameObject.GetComponent<EnemyController>();
-            if (monster == null)
-                return;
-
-            monster.hp -= m_damage;
-            if (monster.hp <= 0)
-            {
-                Destroy(monster.gameObject);
-            }
-            Destroy(gameObject);
+            base.OnTriggerEnter(other);
         }
 
-        private void Move()
+        public override void Move()
         {
             transform.Translate(m_direction * Time.deltaTime);
         }
