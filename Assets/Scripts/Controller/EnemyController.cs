@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class Enemy : MonoBehaviour
+	public class EnemyController : MonoBehaviour
 	{
 		private Rigidbody m_rb;
 		public Transform moveTarget;

@@ -20,7 +20,7 @@ namespace TestJob
 		
 		public void OnTriggerEnter(Collider other)
 		{
-			var monster = other.gameObject.GetComponent<Enemy>();
+			var monster = other.gameObject.GetComponent<EnemyController>();
 			if (monster == null)
 				return;
 
