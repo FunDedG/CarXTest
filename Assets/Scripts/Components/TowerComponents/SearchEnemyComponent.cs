@@ -6,7 +6,7 @@ namespace TestJob
 {
     public class SearchEnemyComponent : MonoBehaviour
     {
-        private List<GameObject> enemiesInRange = new List<GameObject>();
+        private List<GameObject> m_enemiesInRange = new List<GameObject>();
 		private float m_radius;
 
 		public void Init(TowerData towerData)
@@ -18,7 +18,7 @@ namespace TestJob
         {
             if (other.CompareTag("Enemy"))
             {
-				enemiesInRange.Add(other.gameObject);
+				m_enemiesInRange.Add(other.gameObject);
             }
         }
 
@@ -26,7 +26,7 @@ namespace TestJob
         {
             if (other.CompareTag("Enemy"))
             {
-                enemiesInRange.Remove(other.gameObject);
+                m_enemiesInRange.Remove(other.gameObject);
             }
         }
         public GameObject GetTarget()
@@ -34,7 +34,7 @@ namespace TestJob
 			float minDistance = Mathf.Infinity;
 			GameObject closestEnemy = null;
 
-			foreach (GameObject enemy in enemiesInRange)
+			foreach (GameObject enemy in m_enemiesInRange)
 			{
 				if (enemy != null)
 				{

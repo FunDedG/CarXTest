@@ -8,21 +8,21 @@ namespace TestJob
     {
         private Vector3 m_target;
         private float m_rotationSpeed;
-        private GameObject m_gun;
+        private GameObject m_gunTransform;
 
-        public void Init(TowerData towerData, GameObject gun)
+        public void Init(TowerData towerData, GameObject gunTransform)
         {
             m_rotationSpeed = towerData.rotationSpeed;
-			m_gun = gun;
-		}
+            m_gunTransform = gunTransform;
+        }
 
         public void RotateVertical(Vector3 target)
         {
             Vector3 targetVertical = new Vector3(target.x, 0, target.z).normalized;
-            float angleRotation = Vector3.Angle(targetVertical, target);
+            float angleRotation = Mathf.Acos(Vector3.Dot(targetVertical, target.normalized)) * Mathf.Rad2Deg;
             Quaternion verticalRotation = Quaternion.Euler(angleRotation, 0f, 0f);
-            m_gun.transform.localRotation = Quaternion.RotateTowards(
-                m_gun.transform.localRotation,
+            m_gunTransform.transform.localRotation = Quaternion.RotateTowards(
+                m_gunTransform.transform.localRotation,
                 verticalRotation,
                 m_rotationSpeed * Time.deltaTime
             );
@@ -44,9 +44,9 @@ namespace TestJob
             m_target = target;
             if (m_target.magnitude > 0)
             {
-				RotateVertical(target);
-				RotateHorizontal(target);
-			}
+                RotateVertical(target);
+                RotateHorizontal(target);
+            }
         }
     }
 }
