@@ -6,14 +6,14 @@ namespace TestJob
 {
     public abstract class ProjectileBehavior : MonoBehaviour
     {
-		public float speed;
-		public float damage;
-		public virtual void Update()
+		protected float speed;
+		protected float damage;
+		protected virtual void Update()
         {
             Move();
         }
 
-        public virtual void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             var monster = other.gameObject.GetComponent<EnemyController>();
             if (monster == null)
@@ -27,6 +27,6 @@ namespace TestJob
             Destroy(gameObject);
         }
 
-		public abstract void Move();
+		protected abstract void Move();
 	}
 }

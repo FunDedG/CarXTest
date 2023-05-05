@@ -6,12 +6,12 @@ namespace TestJob
 {
     public class SimpleTowerController : TowerBehaviour
     {
-        public override void Start()
+        protected override void Start()
         {
 			base.Start();
         }
 
-        public override void Update()
+        protected override void Update()
         {
 			base.Update();
         }

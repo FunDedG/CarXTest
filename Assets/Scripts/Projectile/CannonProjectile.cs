@@ -18,17 +18,17 @@ namespace TestJob
             this.damage = damage;
         }
 
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
         }
 
-        public override void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
         }
 
-        public override void Move()
+        protected override void Move()
         {
             transform.Translate(m_direction * Time.deltaTime);
         }

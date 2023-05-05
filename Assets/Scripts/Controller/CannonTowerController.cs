@@ -10,14 +10,14 @@ namespace TestJob
         private LeadCalculationComponent m_leadCalculationComponent;
 		public GameObject cannon;
 
-        public override void Start()
+        protected override void Start()
         {
             base.Start();
             m_rotationComponent = GetComponentInChildren<RotationComponent>();
             m_leadCalculationComponent = GetComponent<LeadCalculationComponent>();
             m_rotationComponent.Init(towerData, cannon);
         }
-		public override void Update()
+		protected override void Update()
         {
 			base.Update();
 			RotateTower();
