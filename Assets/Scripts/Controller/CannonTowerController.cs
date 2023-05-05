@@ -17,7 +17,6 @@ namespace TestJob
             m_leadCalculationComponent = GetComponent<LeadCalculationComponent>();
             m_rotationComponent.Init(towerData, cannon);
         }
-		
 		public override void Update()
         {
 			base.Update();

@@ -8,4 +8,9 @@ namespace TestJob
 	{
 		public void RotateTower();
 	}
+
+	public interface IProjectileInit
+	{
+		public void Init(float speed, float damage, GameObject target);
+	}
 }

@@ -1,29 +1,24 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class GuidedProjectile : MonoBehaviour
+	public class GuidedProjectile : MonoBehaviour, IProjectileInit
 	{
 		public GameObject m_target;
-		public float m_speed = 0.2f;
-		public int m_damage = 10;
+		private float m_speed;
+		private float m_damage;
 
-		void Update()
+		public void Init(float speed, float damage, GameObject target)
 		{
-			if (m_target == null)
-			{
-				Destroy(gameObject);
-				return;
-			}
-
-			var translation = m_target.transform.position - transform.position;
-			if (translation.magnitude > m_speed)
-			{
-				translation = translation.normalized * m_speed;
-			}
-			transform.Translate(translation);
+			m_speed = speed;
+			m_damage = damage;
+			m_target = target;
 		}
-
-		void OnTriggerEnter(Collider other)
+		private void Update()
+		{
+			Move();
+		}
+		
+		public void OnTriggerEnter(Collider other)
 		{
 			var monster = other.gameObject.GetComponent<Enemy>();
 			if (monster == null)
@@ -35,6 +30,18 @@ namespace TestJob
 				Destroy(monster.gameObject);
 			}
 			Destroy(gameObject);
+		}
+
+		public void Move()
+		{
+			if (m_target == null)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
+			var translation = (m_target.transform.position - transform.position).normalized * m_speed * Time.deltaTime;
+			transform.Translate(translation);
 		}
 	}
 }
