@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace TestJob
 {
-    public class CannonProjectile : MonoBehaviour
+    public class CannonProjectile : MonoBehaviour, IProjectileInit
     {
         private float m_speed;
         private float m_damage;
@@ -14,7 +14,7 @@ namespace TestJob
 			m_direction = Vector3.forward * m_speed;
 		}
 
-        public void Init(float speed, float damage)
+        public void Init(float speed, float damage, GameObject target)
         {
             m_speed = speed;
             m_damage = damage;
@@ -25,9 +25,9 @@ namespace TestJob
             Move();
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
-            var monster = other.gameObject.GetComponent<Enemy>();
+            var monster = other.gameObject.GetComponent<EnemyController>();
             if (monster == null)
                 return;
 

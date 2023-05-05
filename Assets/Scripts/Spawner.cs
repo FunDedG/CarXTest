@@ -12,7 +12,7 @@ namespace TestJob
 		{
 			if (Time.time > m_lastSpawn + interval)
 			{
-				var monsterBeh = m_enemy.GetComponent<Enemy>();
+				var monsterBeh = m_enemy.GetComponent<EnemyController>();
 				monsterBeh.moveTarget = moveTarget;
 				Instantiate(m_enemy, transform.position, Quaternion.identity);
 				m_lastSpawn = Time.time;
