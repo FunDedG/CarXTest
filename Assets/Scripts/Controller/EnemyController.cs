@@ -22,7 +22,7 @@ namespace TestJob
 			if (moveTarget == null)
 				return;
 
-			if (Vector3.Distance(transform.position, moveTarget.position) <= m_reachDistance)
+			if (Vector3.Distance(transform.position, moveTarget.position) < m_reachDistance)
 			{
 				Destroy(gameObject);
 				return;
