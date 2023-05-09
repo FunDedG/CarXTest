@@ -4,18 +4,24 @@ using UnityEngine;
 
 namespace TestJob
 {
-    public class ProjectileBehavior : MonoBehaviour
+    public abstract class ProjectileBehavior : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+		protected float m_speed;
+		protected float m_damage;
+		protected virtual void Update()
         {
-        
+            Move();
         }
 
-        // Update is called once per frame
-        void Update()
+        protected virtual void OnTriggerEnter(Collider other)
         {
-        
-        }
-    }
+			if(other.gameObject.TryGetComponent<HealthComponent>(out HealthComponent health))
+			{
+				health.TakeDamage(m_damage);
+			}
+			Destroy(gameObject);
+		}
+
+		protected abstract void Move();
+	}
 }

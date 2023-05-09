@@ -3,10 +3,8 @@ using System.Collections;
 
 namespace TestJob
 {
-    public class CannonProjectile : MonoBehaviour, IProjectileInit
+    public class CannonProjectile : ProjectileBehavior, IProjectileInit
     {
-        private float m_speed;
-        private float m_damage;
 		private Vector3 m_direction;
 
 		private void Start()
@@ -20,26 +18,17 @@ namespace TestJob
             m_damage = damage;
         }
 
-        private void Update()
+        protected override void Update()
         {
-            Move();
+            base.Update();
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
-            var monster = other.gameObject.GetComponent<EnemyController>();
-            if (monster == null)
-                return;
-
-            monster.hp -= m_damage;
-            if (monster.hp <= 0)
-            {
-                Destroy(monster.gameObject);
-            }
-            Destroy(gameObject);
+            base.OnTriggerEnter(other);
         }
 
-        private void Move()
+        protected override void Move()
         {
             transform.Translate(m_direction * Time.deltaTime);
         }

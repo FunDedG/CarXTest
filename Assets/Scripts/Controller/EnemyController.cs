@@ -1,35 +1,16 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class EnemyController : MonoBehaviour
+	public class EnemyController : EnemyBehavior, IEnemyInit
 	{
-		private Rigidbody m_rb;
-		public Transform moveTarget;
-		public float speed = 5f;
-		public float maxHP = 30f;
-		public float hp;
-
-		const float m_reachDistance = 0.3f;
-
-		void Start()
+		public void Init(Transform target)
 		{
-			hp = maxHP;
-			m_rb = GetComponent<Rigidbody>();
+			m_target = target;
 		}
 
-		void FixedUpdate()
+		protected override void Start()
 		{
-			if (moveTarget == null)
-				return;
-
-			if (Vector3.Distance(transform.position, moveTarget.position) <= m_reachDistance)
-			{
-				Destroy(gameObject);
-				return;
-			}
-
-			Vector3 direction = moveTarget.position - transform.position;
-			m_rb.velocity = direction.normalized * speed;
+			base.Start();
 		}
 	}
 }

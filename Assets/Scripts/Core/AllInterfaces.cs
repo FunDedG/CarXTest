@@ -13,4 +13,8 @@ namespace TestJob
 	{
 		public void Init(float speed, float damage, GameObject target);
 	}
+	public interface IEnemyInit
+	{
+		public void Init(Transform target);
+	}
 }

@@ -4,14 +4,15 @@ namespace TestJob
 {
 	public abstract class TowerBehaviour : MonoBehaviour
 	{
-		public TowerData towerData;
-		public AttackComponent attackComponent;
-		public SearchEnemyComponent searchEnemyComponent;
-		public SphereCollider sphereCollider;
-		public GameObject projectilePosition;
-		public GameObject projectilePrefab;
+		[SerializeField] protected TowerData towerData;
+		[SerializeField] protected GameObject projectilePosition;
+		[SerializeField] protected GameObject projectilePrefab;
+		protected AttackComponent attackComponent;
+		protected SearchEnemyComponent searchEnemyComponent;
+		protected SphereCollider sphereCollider;
+		
 
-		public virtual void Start()
+		protected virtual void Start()
 		{
 			attackComponent = GetComponent<AttackComponent>();
 			searchEnemyComponent = GetComponent<SearchEnemyComponent>();
@@ -20,14 +21,14 @@ namespace TestJob
 			attackComponent.Init(towerData, projectilePosition, projectilePrefab);
 			searchEnemyComponent.Init(towerData);
 		}
-		public virtual void Attack()
+		protected virtual void Attack()
 		{
 			if (searchEnemyComponent.GetTarget())
 			{
 				attackComponent.Attack(searchEnemyComponent.GetTarget());
 			}
 		}
-		public virtual void Update()
+		protected virtual void Update()
 		{
 			Attack();
 		}
