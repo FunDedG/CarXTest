@@ -6,16 +6,19 @@ namespace TestJob
 {
     public class HealthComponent : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+		private float m_health;
+		public void Init(EnemyData enemyData)
+		{
+			m_health = enemyData.health;
+		}
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+		public void TakeDamage(float damage)
+		{
+			m_health -= damage;
+        	if(m_health <= 0)
+        	{
+				Destroy(gameObject);
+			}
+		}
     }
 }

@@ -7,7 +7,7 @@ namespace TestJob
     public abstract class EnemyBehavior : MonoBehaviour
     {
 		[SerializeField] protected EnemyData enemyData;
-		public Transform target;
+		protected Transform m_target;
 		protected MoveComponent moveComponent;
 		protected HealthComponent healthComponent;
 
@@ -15,8 +15,12 @@ namespace TestJob
 		{
 			moveComponent = GetComponent<MoveComponent>();
 			healthComponent = GetComponent<HealthComponent>();
-			moveComponent.Init(enemyData, target);
+			moveComponent.Init(enemyData, m_target);
+			healthComponent.Init(enemyData);
 		}
-
+		private void FixedUpdate()
+		{
+			moveComponent.MoveToTarget();
+		}
 	}
 }

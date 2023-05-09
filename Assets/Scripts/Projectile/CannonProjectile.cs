@@ -9,13 +9,13 @@ namespace TestJob
 
 		private void Start()
 		{
-			m_direction = Vector3.forward * speed;
+			m_direction = Vector3.forward * m_speed;
 		}
 
         public void Init(float speed, float damage, GameObject target)
         {
-            this.speed = speed;
-            this.damage = damage;
+            m_speed = speed;
+            m_damage = damage;
         }
 
         protected override void Update()

@@ -6,8 +6,8 @@ namespace TestJob
 {
     public abstract class ProjectileBehavior : MonoBehaviour
     {
-		protected float speed;
-		protected float damage;
+		protected float m_speed;
+		protected float m_damage;
 		protected virtual void Update()
         {
             Move();
@@ -15,17 +15,16 @@ namespace TestJob
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            var monster = other.gameObject.GetComponent<EnemyController>();
-            if (monster == null)
-                return;
+            // var enemy = other.gameObject.GetComponent<EnemyController>();
+            // if (enemy == null)
+            //     return;
 
-            monster.hp -= damage;
-            if (monster.hp <= 0)
-            {
-                Destroy(monster.gameObject);
-            }
-            Destroy(gameObject);
-        }
+			if(other.gameObject.TryGetComponent<HealthComponent>(out HealthComponent health))
+			{
+				health.TakeDamage(m_damage);
+			}
+			Destroy(gameObject);
+		}
 
 		protected abstract void Move();
 	}

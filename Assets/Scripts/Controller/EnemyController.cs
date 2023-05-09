@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class EnemyController : EnemyBehavior
+	public class EnemyController : EnemyBehavior, IEnemyInit
 	{
-		public float maxHP = 30f;
-		public float hp;
+		public void Init(Transform target)
+		{
+			m_target = target;
+		}
 
 		protected override void Start()
 		{
 			base.Start();
-			hp = maxHP;
-		}
-
-		private void FixedUpdate()
-		{
-			moveComponent.MoveToTarget();
 		}
 	}
 }

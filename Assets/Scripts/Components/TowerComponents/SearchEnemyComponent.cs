@@ -12,7 +12,7 @@ namespace TestJob
 
 		public void Init(TowerData towerData)
 		{
-			this.m_radius = towerData.range;
+			m_radius = towerData.range;
 		}
 
 		private void OnTriggerEnter(Collider other)

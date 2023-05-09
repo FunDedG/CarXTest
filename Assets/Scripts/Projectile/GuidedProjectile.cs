@@ -7,8 +7,8 @@ namespace TestJob
 
 		public void Init(float speed, float damage, GameObject target)
 		{
-			this.speed = speed;
-			this.damage = damage;
+			m_speed = speed;
+			m_damage = damage;
 			m_target = target;
 		}
 		protected override void Update()
@@ -29,7 +29,7 @@ namespace TestJob
 				return;
 			}
 
-			var translation = (m_target.transform.position - transform.position).normalized * speed * Time.deltaTime;
+			var translation = (m_target.transform.position - transform.position).normalized * m_speed * Time.deltaTime;
 			transform.Translate(translation);
 		}
 	}
