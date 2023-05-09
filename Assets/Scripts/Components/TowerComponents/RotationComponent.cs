@@ -16,7 +16,7 @@ namespace TestJob
             m_gunTransform = gunTransform;
         }
 
-        public void RotateVertical(Vector3 target)
+        private void RotateVertical(Vector3 target)
         {
             Vector3 targetVertical = new Vector3(target.x, 0, target.z).normalized;
             float angleRotation = Mathf.Acos(Vector3.Dot(targetVertical, target.normalized)) * Mathf.Rad2Deg;
@@ -28,7 +28,7 @@ namespace TestJob
             );
         }
 
-        public void RotateHorizontal(Vector3 target)
+        private void RotateHorizontal(Vector3 target)
         {
             Vector3 targetHorizontal = new Vector3(target.x, 0, target.z);
             Quaternion targetRotation = Quaternion.LookRotation(targetHorizontal);

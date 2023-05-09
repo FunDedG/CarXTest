@@ -7,8 +7,8 @@ namespace TestJob
 	public class SearchEnemyComponent : MonoBehaviour
 	{
 		private List<GameObject> m_enemiesInRange = new List<GameObject>();
-		private float m_radius;
 		private GameObject m_lastTarget;
+		private float m_radius;
 
 		public void Init(TowerData towerData)
 		{
