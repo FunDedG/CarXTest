@@ -7,25 +7,25 @@ namespace TestJob
 		[SerializeField] protected TowerData towerData;
 		[SerializeField] protected GameObject projectilePosition;
 		[SerializeField] protected GameObject projectilePrefab;
-		protected AttackComponent attackComponent;
-		protected SearchEnemyComponent searchEnemyComponent;
-		protected SphereCollider sphereCollider;
+		protected AttackComponent m_attackComponent;
+		protected SearchEnemyComponent m_searchEnemyComponent;
+		protected SphereCollider m_sphereCollider;
 		
 
 		protected virtual void Start()
 		{
-			attackComponent = GetComponent<AttackComponent>();
-			searchEnemyComponent = GetComponent<SearchEnemyComponent>();
-			sphereCollider = GetComponent<SphereCollider>();
-			sphereCollider.radius = towerData.range;
-			attackComponent.Init(towerData, projectilePosition, projectilePrefab);
-			searchEnemyComponent.Init(towerData);
+			m_attackComponent = GetComponent<AttackComponent>();
+			m_searchEnemyComponent = GetComponent<SearchEnemyComponent>();
+			m_sphereCollider = GetComponent<SphereCollider>();
+			m_sphereCollider.radius = towerData.range;
+			m_attackComponent.Init(towerData, projectilePosition, projectilePrefab);
+			m_searchEnemyComponent.Init(towerData);
 		}
 		protected virtual void Attack()
 		{
-			if (searchEnemyComponent.GetTarget())
+			if (m_searchEnemyComponent.GetTarget())
 			{
-				attackComponent.Attack(searchEnemyComponent.GetTarget());
+				m_attackComponent.Attack(m_searchEnemyComponent.GetTarget());
 			}
 		}
 		protected virtual void Update()

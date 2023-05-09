@@ -8,6 +8,7 @@ namespace TestJob
     {
 		protected float m_speed;
 		protected float m_damage;
+		protected float m_lifeTime;
 		protected virtual void Update()
         {
             Move();

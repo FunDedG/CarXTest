@@ -6,9 +6,10 @@ namespace TestJob
 {
     public class CannonTowerController : TowerBehaviour, IRotation
     {
+		[SerializeField] private GameObject cannon;
         private RotationComponent m_rotationComponent;
         private LeadCalculationComponent m_leadCalculationComponent;
-		public GameObject cannon;
+		
 
         protected override void Start()
         {
@@ -24,12 +25,12 @@ namespace TestJob
         }
         public void RotateTower()
         {
-            if (searchEnemyComponent.GetTarget())
+            if (m_searchEnemyComponent.GetTarget())
             {
                 Vector3 predictedPosition = m_leadCalculationComponent.PredictQuadratic(
                     projectilePosition.transform.position,
-                    searchEnemyComponent.GetTarget().transform.position,
-                    searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
+                    m_searchEnemyComponent.GetTarget().transform.position,
+                    m_searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
                     towerData.projectileSpeed
                 );
                 m_rotationComponent.Rotate(predictedPosition);

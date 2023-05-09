@@ -5,10 +5,16 @@ namespace TestJob
 	{
 		private GameObject m_target;
 
-		public void Init(float speed, float damage, GameObject target)
+		private void Start()
 		{
-			m_speed = speed;
-			m_damage = damage;
+			Destroy(gameObject, m_lifeTime);
+		}
+
+		public void Init(float speed, float damage, float lifeTime, GameObject target)
+        {
+            m_speed = speed;
+            m_damage = damage;
+			m_lifeTime = lifeTime;
 			m_target = target;
 		}
 		protected override void Update()

@@ -7,6 +7,7 @@ namespace TestJob
     public class HealthComponent : MonoBehaviour
     {
 		private float m_health;
+		
 		public void Init(EnemyData enemyData)
 		{
 			m_health = enemyData.health;

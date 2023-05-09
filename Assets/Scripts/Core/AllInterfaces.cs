@@ -11,7 +11,7 @@ namespace TestJob
 
 	public interface IProjectileInit
 	{
-		public void Init(float speed, float damage, GameObject target);
+		public void Init(float speed, float damage, float lifeTime, GameObject target);
 	}
 	public interface IEnemyInit
 	{

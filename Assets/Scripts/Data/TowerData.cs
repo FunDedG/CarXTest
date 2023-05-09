@@ -10,5 +10,6 @@ namespace TestJob
 		public float shootInterval;
 		public float rotationSpeed;
 		public float projectileSpeed;
+		public float lifeTime;
 	}
 }

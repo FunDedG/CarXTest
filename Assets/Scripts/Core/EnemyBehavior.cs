@@ -8,19 +8,19 @@ namespace TestJob
     {
 		[SerializeField] protected EnemyData enemyData;
 		protected Transform m_target;
-		protected MoveComponent moveComponent;
-		protected HealthComponent healthComponent;
+		protected MoveComponent m_moveComponent;
+		protected HealthComponent m_healthComponent;
 
 		protected virtual void Start()
 		{
-			moveComponent = GetComponent<MoveComponent>();
-			healthComponent = GetComponent<HealthComponent>();
-			moveComponent.Init(enemyData, m_target);
-			healthComponent.Init(enemyData);
+			m_moveComponent = GetComponent<MoveComponent>();
+			m_healthComponent = GetComponent<HealthComponent>();
+			m_moveComponent.Init(enemyData, m_target);
+			m_healthComponent.Init(enemyData);
 		}
 		private void FixedUpdate()
 		{
-			moveComponent.MoveToTarget();
+			m_moveComponent.MoveToTarget();
 		}
 	}
 }

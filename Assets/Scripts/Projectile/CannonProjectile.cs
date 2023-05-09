@@ -10,13 +10,15 @@ namespace TestJob
 		private void Start()
 		{
 			m_direction = Vector3.forward * m_speed;
+			Destroy(gameObject, m_lifeTime);
 		}
 
-        public void Init(float speed, float damage, GameObject target)
+        public void Init(float speed, float damage, float lifeTime, GameObject target)
         {
             m_speed = speed;
             m_damage = damage;
-        }
+			m_lifeTime = lifeTime;
+		}
 
         protected override void Update()
         {
@@ -32,5 +34,5 @@ namespace TestJob
         {
             transform.Translate(m_direction * Time.deltaTime);
         }
-    }
+	}
 }
