@@ -15,10 +15,6 @@ namespace TestJob
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            // var enemy = other.gameObject.GetComponent<EnemyController>();
-            // if (enemy == null)
-            //     return;
-
 			if(other.gameObject.TryGetComponent<HealthComponent>(out HealthComponent health))
 			{
 				health.TakeDamage(m_damage);

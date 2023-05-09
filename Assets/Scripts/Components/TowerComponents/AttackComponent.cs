@@ -13,7 +13,6 @@ namespace TestJob
 		private GameObject m_projectilePrefab;
 		private GameObject m_projectileStartPosition;
 		
-	
 		private void Start()
     	{
         	m_lastAttackTime = -m_attackInterval;
