@@ -17,15 +17,6 @@ namespace TestJob
 			m_lifeTime = lifeTime;
 			m_target = target;
 		}
-		protected override void Update()
-		{
-			base.Update();
-		}
-		
-		protected override void OnTriggerEnter(Collider other)
-		{
-			base.OnTriggerEnter(other);
-		}
 
 		protected override void Move()
 		{

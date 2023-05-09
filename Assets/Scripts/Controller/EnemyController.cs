@@ -7,10 +7,5 @@ namespace TestJob
 		{
 			m_target = target;
 		}
-
-		protected override void Start()
-		{
-			base.Start();
-		}
 	}
 }

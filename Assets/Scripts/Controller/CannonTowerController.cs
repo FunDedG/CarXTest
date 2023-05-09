@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestJob
 {
-    public class CannonTowerController : TowerBehaviour, IRotation
+    public class CannonTowerController : TowerBehaviour
     {
 		[SerializeField] private GameObject cannon;
         private RotationComponent m_rotationComponent;

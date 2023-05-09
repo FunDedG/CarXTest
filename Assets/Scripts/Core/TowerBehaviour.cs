@@ -11,7 +11,6 @@ namespace TestJob
 		protected SearchEnemyComponent m_searchEnemyComponent;
 		protected SphereCollider m_sphereCollider;
 		
-
 		protected virtual void Start()
 		{
 			m_attackComponent = GetComponent<AttackComponent>();

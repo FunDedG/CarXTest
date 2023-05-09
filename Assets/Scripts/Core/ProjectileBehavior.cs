@@ -13,8 +13,8 @@ namespace TestJob
         {
             Move();
         }
-
-        protected virtual void OnTriggerEnter(Collider other)
+		
+        protected virtual void OnCollisionEnter(Collision other)
         {
 			if(other.gameObject.TryGetComponent<HealthComponent>(out HealthComponent health))
 			{

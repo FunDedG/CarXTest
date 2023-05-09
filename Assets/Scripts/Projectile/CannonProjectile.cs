@@ -20,16 +20,6 @@ namespace TestJob
 			m_lifeTime = lifeTime;
 		}
 
-        protected override void Update()
-        {
-            base.Update();
-        }
-
-        protected override void OnTriggerEnter(Collider other)
-        {
-            base.OnTriggerEnter(other);
-        }
-
         protected override void Move()
         {
             transform.Translate(m_direction * Time.deltaTime);

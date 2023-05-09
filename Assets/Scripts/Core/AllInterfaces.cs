@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace TestJob
 {
-	public interface IRotation
-	{
-		public void RotateTower();
-	}
-
 	public interface IProjectileInit
 	{
 		public void Init(float speed, float damage, float lifeTime, GameObject target);
