@@ -13,7 +13,7 @@ namespace TestJob
 			Destroy(gameObject, m_lifeTime);
 		}
 
-        public void Init(float speed, float damage, float lifeTime, Transform target)
+        public void Init(float speed, float damage, float lifeTime, GameObject target)
         {
             m_speed = speed;
             m_damage = damage;

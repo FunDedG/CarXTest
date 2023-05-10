@@ -8,9 +8,9 @@ namespace TestJob
     {
         private Vector3 m_target;
         private float m_rotationSpeed;
-        private Transform m_gunTransform;
+        private GameObject m_gunTransform;
 
-        public void Init(TowerData towerData, Transform gunTransform)
+        public void Init(TowerData towerData, GameObject gunTransform)
         {
             m_rotationSpeed = towerData.rotationSpeed;
             m_gunTransform = gunTransform;
@@ -21,8 +21,8 @@ namespace TestJob
             Vector3 targetVertical = new Vector3(target.x, 0, target.z).normalized;
             float angleRotation = Mathf.Acos(Vector3.Dot(targetVertical, target.normalized)) * Mathf.Rad2Deg;
             Quaternion verticalRotation = Quaternion.Euler(angleRotation, 0f, 0f);
-            m_gunTransform.localRotation = Quaternion.RotateTowards(
-                m_gunTransform.localRotation,
+            m_gunTransform.transform.localRotation = Quaternion.RotateTowards(
+                m_gunTransform.transform.localRotation,
                 verticalRotation,
                 m_rotationSpeed * Time.deltaTime
             );
