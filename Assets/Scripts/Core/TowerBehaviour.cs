@@ -5,7 +5,7 @@ namespace TestJob
 	public abstract class TowerBehaviour : MonoBehaviour
 	{
 		[SerializeField] protected TowerData towerData;
-		[SerializeField] protected GameObject projectilePosition;
+		[SerializeField] protected Transform projectilePosition;
 		[SerializeField] protected GameObject projectilePrefab;
 		protected AttackComponent m_attackComponent;
 		protected SearchEnemyComponent m_searchEnemyComponent;

@@ -6,7 +6,7 @@ namespace TestJob
 {
     public class CannonTowerController : TowerBehaviour
     {
-		[SerializeField] private GameObject cannon;
+		[SerializeField] private readonly Transform cannonTransform;
         private RotationComponent m_rotationComponent;
         private LeadCalculationComponent m_leadCalculationComponent;
 		
@@ -16,7 +16,7 @@ namespace TestJob
             base.Start();
             m_rotationComponent = GetComponentInChildren<RotationComponent>();
             m_leadCalculationComponent = GetComponent<LeadCalculationComponent>();
-            m_rotationComponent.Init(towerData, cannon);
+            m_rotationComponent.Init(towerData, cannonTransform);
         }
 		protected override void Update()
         {
@@ -28,7 +28,7 @@ namespace TestJob
             if (m_searchEnemyComponent.GetTarget())
             {
                 Vector3 predictedPosition = m_leadCalculationComponent.PredictQuadratic(
-                    projectilePosition.transform.position,
+                    projectilePosition.position,
                     m_searchEnemyComponent.GetTarget().transform.position,
                     m_searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
                     towerData.projectileSpeed
