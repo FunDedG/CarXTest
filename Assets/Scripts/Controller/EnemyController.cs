@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class EnemyController : EnemyBehavior, IEnemyInit
+	public class EnemyController : EnemyBehavior
 	{
-		public void Init(Transform target)
-		{
-			m_target = target;
-		}
+
 	}
 }

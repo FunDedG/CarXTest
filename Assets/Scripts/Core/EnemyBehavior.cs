@@ -11,6 +11,11 @@ namespace TestJob
 		protected MoveComponent m_moveComponent;
 		protected HealthComponent m_healthComponent;
 
+		public virtual void Init(Transform target)
+		{
+			m_target = target;
+		}
+
 		protected virtual void Start()
 		{
 			m_moveComponent = GetComponent<MoveComponent>();
