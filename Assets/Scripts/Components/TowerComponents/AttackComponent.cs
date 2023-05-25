@@ -27,7 +27,7 @@ namespace TestJob
 
 			GameObject newProjectile = Instantiate(m_projectilePrefab, m_projectileStartPosition.transform.position, Quaternion.identity);
 			newProjectile.transform.rotation = m_projectileStartPosition.transform.rotation;
-			var projectileInit = newProjectile.GetComponent<IProjectileInit>();
+			var projectileInit = newProjectile.GetComponent<ProjectileBehavior>();
 			projectileInit.Init(m_towerData.projectileSpeed, m_towerData.damage, m_towerData.lifeTime, target);
 
 			m_lastAttackTime = Time.time;

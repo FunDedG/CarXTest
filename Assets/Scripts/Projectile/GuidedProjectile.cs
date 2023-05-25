@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace TestJob
 {
-	public class GuidedProjectile : ProjectileBehavior, IProjectileInit
+	public class GuidedProjectile : ProjectileBehavior
 	{
 		private GameObject m_target;
 
@@ -10,11 +10,9 @@ namespace TestJob
 			Destroy(gameObject, m_lifeTime);
 		}
 
-		public void Init(float speed, float damage, float lifeTime, GameObject target)
+		public override void Init(float speed, float damage, float lifeTime, GameObject target)
         {
-            m_speed = speed;
-            m_damage = damage;
-			m_lifeTime = lifeTime;
+			base.Init(speed, damage, lifeTime, target);
 			m_target = target;
 		}
 

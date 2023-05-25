@@ -23,6 +23,13 @@ namespace TestJob
 			Destroy(gameObject);
 		}
 
+		public virtual void Init(float speed, float damage, float lifeTime, GameObject target)
+		{
+			m_speed = speed;
+			m_damage = damage;
+			m_lifeTime = lifeTime;
+		}
+
 		protected abstract void Move();
 	}
 }
