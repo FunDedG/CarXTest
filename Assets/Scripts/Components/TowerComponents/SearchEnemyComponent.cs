@@ -31,6 +31,10 @@ namespace TestJob
 			if (other.CompareTag("Enemy"))
 			{
 				m_enemiesInRange.Remove(other.gameObject);
+				if (m_enemiesInRange.Count == 0)
+				{
+					m_lastTarget = null;
+				}
 			}
 		}
 
@@ -39,12 +43,22 @@ namespace TestJob
 			HealthComponent death = enemy.GetComponent<HealthComponent>();
             death.onDeath -= RemoveFromList;
 			m_enemiesInRange.Remove(enemy);
+			if (m_enemiesInRange.Count == 0)
+			{
+				m_lastTarget = null;
+			}
 		}
 
 		public GameObject GetTarget()
 		{
 			float minDistance = Mathf.Infinity;
 			Vector3 positionTower = transform.position;
+
+			if (m_enemiesInRange.Count == 0)
+			{
+				m_lastTarget = null;
+				return null;
+			}
 
 			if (m_lastTarget != null)
 			{

@@ -47,6 +47,11 @@ namespace TestJob
                 RotateVertical(target);
                 RotateHorizontal(target);
             }
+			else
+			{
+				transform.rotation = Quaternion.identity;
+				m_gunTransform.transform.localRotation = Quaternion.identity;
+			}
         }
     }
 }
