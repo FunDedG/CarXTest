@@ -6,6 +6,7 @@ namespace TestJob
 {
     public class HealthComponent : MonoBehaviour
     {
+		public event System.Action<GameObject> onDeath;
 		private float m_health;
 		
 		public void Init(EnemyData enemyData)
@@ -18,6 +19,7 @@ namespace TestJob
 			m_health -= damage;
         	if(m_health <= 0)
         	{
+				onDeath?.Invoke(gameObject);
 				Destroy(gameObject);
 			}
 		}

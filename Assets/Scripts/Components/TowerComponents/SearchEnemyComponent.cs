@@ -19,7 +19,10 @@ namespace TestJob
 		{
 			if (other.CompareTag("Enemy"))
 			{
+				Debug.Log("Add " + other.gameObject.name + " in list");
 				m_enemiesInRange.Add(other.gameObject);
+				HealthComponent death = other.gameObject.GetComponent<HealthComponent>();
+                death.onDeath += RemoveFromList;
 			}
 		}
 
@@ -29,6 +32,13 @@ namespace TestJob
 			{
 				m_enemiesInRange.Remove(other.gameObject);
 			}
+		}
+
+		public void RemoveFromList(GameObject enemy)
+		{
+			HealthComponent death = enemy.GetComponent<HealthComponent>();
+            death.onDeath -= RemoveFromList;
+			m_enemiesInRange.Remove(enemy);
 		}
 
 		public GameObject GetTarget()
