@@ -9,12 +9,15 @@ namespace TestJob
         private Vector3 m_target;
         private float m_rotationSpeed;
         private GameObject m_gunTransform;
+		// private Quaternion m_originalRotation;
+		// private bool m_isTargetPresent = false;
 
         public void Init(TowerData towerData, GameObject gunTransform)
         {
             m_rotationSpeed = towerData.rotationSpeed;
             m_gunTransform = gunTransform;
-        }
+			//m_originalRotation = transform.rotation;
+		}
 
         private void RotateVertical(Vector3 target)
         {
@@ -39,19 +42,23 @@ namespace TestJob
             );
         }
 
-        public void Rotate(Vector3 target)
-        {
-            m_target = target;
-            if (m_target.magnitude > 0)
-            {
-                RotateVertical(target);
-                RotateHorizontal(target);
-            }
-			else
+		public void Rotate(Vector3 target)
+		{
+			m_target = target;
+			if (m_target.magnitude > 0)
 			{
-				transform.rotation = Quaternion.identity;
-				m_gunTransform.transform.localRotation = Quaternion.identity;
+				RotateVertical(target);
+				RotateHorizontal(target);
 			}
-        }
+		}
+		public void ResetRotation()
+		{
+			Quaternion targetRotation = Quaternion.identity;
+			transform.rotation = Quaternion.RotateTowards(
+				transform.rotation,
+				targetRotation,
+				m_rotationSpeed * Time.deltaTime
+			);
+		}
     }
 }

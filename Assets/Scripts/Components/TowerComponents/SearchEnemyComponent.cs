@@ -19,7 +19,6 @@ namespace TestJob
 		{
 			if (other.CompareTag("Enemy"))
 			{
-				Debug.Log("Add " + other.gameObject.name + " in list");
 				m_enemiesInRange.Add(other.gameObject);
 				HealthComponent death = other.gameObject.GetComponent<HealthComponent>();
                 death.onDeath += RemoveFromList;
@@ -29,7 +28,7 @@ namespace TestJob
 		private void OnTriggerExit(Collider other)
 		{
 			if (other.CompareTag("Enemy"))
-			{
+			{	
 				m_enemiesInRange.Remove(other.gameObject);
 				if (m_enemiesInRange.Count == 0)
 				{

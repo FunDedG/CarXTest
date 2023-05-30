@@ -35,6 +35,10 @@ namespace TestJob
                 );
                 m_rotationComponent.Rotate(predictedPosition);
             }
+			else
+			{
+				m_rotationComponent.ResetRotation();
+			}
         }
     }
 }
