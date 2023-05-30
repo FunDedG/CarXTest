@@ -42,9 +42,7 @@ namespace TestJob
 			else
 			{
 				float projectileTimeToTarget = Mathf.Min(xFirst, xSecond);
-				Vector3 futureTargetPosition = targetPosition + targetVelocity * projectileTimeToTarget;
-				Vector3 futureTargetDirection = futureTargetPosition - shooterPosition;
-				return futureTargetDirection;
+				return targetPosition + targetVelocity * projectileTimeToTarget - shooterPosition;
 			}
 		}
     }

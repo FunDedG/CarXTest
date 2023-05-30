@@ -9,14 +9,11 @@ namespace TestJob
         private Vector3 m_target;
         private float m_rotationSpeed;
         private GameObject m_gunTransform;
-		// private Quaternion m_originalRotation;
-		// private bool m_isTargetPresent = false;
 
         public void Init(TowerData towerData, GameObject gunTransform)
         {
             m_rotationSpeed = towerData.rotationSpeed;
             m_gunTransform = gunTransform;
-			//m_originalRotation = transform.rotation;
 		}
 
         private void RotateVertical(Vector3 target)
