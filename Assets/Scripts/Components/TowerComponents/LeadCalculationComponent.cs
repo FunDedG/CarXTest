@@ -24,24 +24,24 @@ namespace TestJob
 
 			float sqrtDiscriminant = Mathf.Sqrt(discriminant);
 
-			float xFirst = (-b + sqrtDiscriminant) / (2f * a);
-            float xSecond = (-b - sqrtDiscriminant) / (2f * a);
+			float timeFirst = (-b + sqrtDiscriminant) / (2f * a);
+            float timeSecond = (-b - sqrtDiscriminant) / (2f * a);
 
-            if (xFirst < 0 && xSecond < 0)
+            if (timeFirst < 0 && timeSecond < 0)
             {
                 return Vector3.zero;
 			}
-            else if (xFirst < 0)
+            else if (timeFirst < 0)
             {
-                return targetPosition + targetVelocity * xSecond - shooterPosition;
+                return targetPosition + targetVelocity * timeSecond - shooterPosition;
             }
-            else if (xSecond < 0)
+            else if (timeSecond < 0)
             {
-                return targetPosition + targetVelocity * xFirst - shooterPosition;
+                return targetPosition + targetVelocity * timeFirst - shooterPosition;
             }
 			else
 			{
-				float projectileTimeToTarget = Mathf.Min(xFirst, xSecond);
+				float projectileTimeToTarget = Mathf.Min(timeFirst, timeSecond);
 				return targetPosition + targetVelocity * projectileTimeToTarget - shooterPosition;
 			}
 		}

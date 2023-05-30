@@ -9,6 +9,14 @@ namespace TestJob
 		protected float m_speed;
 		protected float m_damage;
 		protected float m_lifeTime;
+
+		public virtual void Init(float speed, float damage, float lifeTime, GameObject target)
+		{
+			m_speed = speed;
+			m_damage = damage;
+			m_lifeTime = lifeTime;
+		}
+		
 		protected virtual void Update()
         {
             Move();
@@ -16,18 +24,11 @@ namespace TestJob
 		
         protected virtual void OnCollisionEnter(Collision other)
         {
-			if(other.gameObject.TryGetComponent<HealthComponent>(out HealthComponent health))
+			if(other.gameObject.TryGetComponent(out HealthComponent health))
 			{
 				health.TakeDamage(m_damage);
 			}
 			Destroy(gameObject);
-		}
-
-		public virtual void Init(float speed, float damage, float lifeTime, GameObject target)
-		{
-			m_speed = speed;
-			m_damage = damage;
-			m_lifeTime = lifeTime;
 		}
 
 		protected abstract void Move();

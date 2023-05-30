@@ -23,7 +23,7 @@ namespace TestJob
 			base.Update();
 			RotateTower();
         }
-        public void RotateTower()
+        private void RotateTower()
         {
             if (m_searchEnemyComponent.GetTarget())
             {
