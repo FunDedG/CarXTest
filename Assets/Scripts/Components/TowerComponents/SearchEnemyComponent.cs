@@ -29,6 +29,8 @@ namespace TestJob
 		{
 			if (other.CompareTag("Enemy"))
 			{	
+				HealthComponent death = other.gameObject.GetComponent<HealthComponent>();
+				death.onDeath -= RemoveFromList;
 				m_enemiesInRange.Remove(other.gameObject);
 				if (m_enemiesInRange.Count == 0)
 				{
