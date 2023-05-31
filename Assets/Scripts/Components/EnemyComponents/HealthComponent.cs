@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace TestJob
 {
     public class HealthComponent : MonoBehaviour
     {
-		public event System.Action<GameObject> onDeath;
+		public event Action<GameObject> onDeath;
 		private float m_health;
 		
 		public void Init(EnemyData enemyData)
