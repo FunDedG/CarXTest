@@ -33,7 +33,9 @@ namespace TestJob
                     m_searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
                     towerData.projectileSpeed
                 );
-                m_rotationComponent.Rotate(predictedPosition);
+				float angleRotation = m_leadCalculationComponent.AngleBallisticCalculate(predictedPosition, towerData.projectileSpeed);
+				m_rotationComponent.RotateVertical(angleRotation);
+				m_rotationComponent.RotateHorizontal(predictedPosition);
             }
 			else
 			{
