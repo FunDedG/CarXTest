@@ -18,7 +18,7 @@ namespace TestJob
 
         public void RotateVertical(float angleRotation)
         {
-			Quaternion verticalRotation = Quaternion.Euler(360 - angleRotation, 0f, 0f);
+			Quaternion verticalRotation = Quaternion.Euler(angleRotation, 0f, 0f);
             m_gunTransform.transform.localRotation = Quaternion.RotateTowards(
                 m_gunTransform.transform.localRotation,
                 verticalRotation,

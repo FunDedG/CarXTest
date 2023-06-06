@@ -6,12 +6,7 @@ namespace TestJob
 {
     public class LeadCalculationComponent : MonoBehaviour
     {
-        public Vector3 PredictQuadratic(
-            Vector3 shooterPosition,
-            Vector3 targetPosition,
-            Vector3 targetVelocity,
-            float projectileSpeed
-        )
+        public Vector3 PredictQuadratic(Vector3 shooterPosition, Vector3 targetPosition, Vector3 targetVelocity, float projectileSpeed)
         {
             Vector3 relativePosition = targetPosition - shooterPosition;
             Vector3 relativeVelocity = targetVelocity;
@@ -55,18 +50,18 @@ namespace TestJob
         public float AngleCalculate(Vector3 target)
         {
             Vector3 targetVertical = new Vector3(target.x, 0, target.z).normalized;
-            float angleRotation =
-                Mathf.Acos(Vector3.Dot(targetVertical, target.normalized)) * Mathf.Rad2Deg;
+            float angleRotation = Mathf.Acos(Vector3.Dot(targetVertical, target.normalized)) * Mathf.Rad2Deg;
             return angleRotation;
         }
 
         public float AngleBallisticCalculate(Vector3 targetDir, float projectileSpeed)
         {
             float x = targetDir.magnitude;
-
             float y = targetDir.y;
+
 			float projectileSpeedSqr = projectileSpeed * projectileSpeed;
 
+			float fullCircle = 360f;
 			float gravity = 9.8f;
 
             float tanTheta =
@@ -83,7 +78,7 @@ namespace TestJob
                 ) / (gravity * x);
             float angle = Mathf.Atan(tanTheta) * Mathf.Rad2Deg;
 			if (angle > 0)
-            	return angle;
+            	return fullCircle - angle;
 			else
 				return 0f;
 		}

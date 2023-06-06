@@ -11,11 +11,15 @@ namespace TestJob
 		private GameObject m_projectilePrefab;
 		private GameObject m_projectileStartPosition;
 		
-		public void Init(TowerData towerData, GameObject projectileStartPosition, GameObject projectilePrefab)
+		public void Init(TowerData towerData, GameObject projectileStartPosition)
 		{
 			m_towerData = towerData;
 			m_lastAttackTime = m_towerData.shootInterval;
 			m_projectileStartPosition = projectileStartPosition;
+		}
+
+		public void GetProjectilePrefab(GameObject projectilePrefab)
+		{
 			m_projectilePrefab = projectilePrefab;
 		}
 
@@ -24,7 +28,6 @@ namespace TestJob
 			if (target == null) return;
 
 			if (Time.time - m_lastAttackTime < m_towerData.shootInterval) return;
-
 			GameObject newProjectile = Instantiate(m_projectilePrefab, m_projectileStartPosition.transform.position, Quaternion.identity);
 			newProjectile.transform.rotation = m_projectileStartPosition.transform.rotation;
 			var projectileInit = newProjectile.GetComponent<ProjectileBehavior>();
