@@ -10,17 +10,18 @@ namespace TestJob
 		[SerializeField] private GameObject cannon;
         private RotationComponent m_rotationComponent;
         private LeadCalculationComponent m_leadCalculationComponent;
-		private bool isBallistic = false;
+		private InputComponent m_inputComponent;
+		private bool m_isBallistic = false;
 		
 
         protected override void Start()
         {
             base.Start();
-			InputComponent inputComponent = GetComponent<InputComponent>();
+			m_inputComponent = GetComponent<InputComponent>();
 			m_rotationComponent = GetComponentInChildren<RotationComponent>();
             m_leadCalculationComponent = GetComponent<LeadCalculationComponent>();
             m_rotationComponent.Init(towerData, cannon);
-			inputComponent.onChangeMode += ChangeMode;
+			m_inputComponent.onChangeMode += ChangeMode;
 		}
 		protected override void Update()
         {
@@ -30,14 +31,14 @@ namespace TestJob
 
 		private void ChangeMode()
 		{
-			isBallistic = !isBallistic;
-			if(isBallistic)
+			m_isBallistic = !m_isBallistic;
+			if(m_isBallistic)
 			{
-				m_attackComponent.GetProjectilePrefab(projectilePrefab[0]);
+				m_attackComponent.GetProjectilePrefab(projectilePrefab[1]);
 			}
 			else
 			{
-				m_attackComponent.GetProjectilePrefab(projectilePrefab[1]);
+				m_attackComponent.GetProjectilePrefab(projectilePrefab[0]);
 			}
 		}
         private void RotateTower()
@@ -51,7 +52,7 @@ namespace TestJob
                     m_searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
                     towerData.projectileSpeed
                 );
-				if (isBallistic)
+				if (m_isBallistic)
 				{
 					angleRotation = m_leadCalculationComponent.AngleBallisticCalculate(predictedPosition, towerData.projectileSpeed);
 				}
@@ -68,8 +69,7 @@ namespace TestJob
         }
 		private void OnDisable()
 		{
-			InputComponent inputComponent = GetComponent<InputComponent>();
-			inputComponent.onChangeMode -= ChangeMode;
+			m_inputComponent.onChangeMode -= ChangeMode;
 		}
     }
 }

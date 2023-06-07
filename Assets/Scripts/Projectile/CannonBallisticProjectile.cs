@@ -5,16 +5,11 @@ using UnityEngine;
 namespace TestJob
 {
     public class CannonBallisticProjectile : ProjectileBehavior
-    {
-
-		private Rigidbody m_rb;
-		private void Start()
+	{
+		protected override void Start()
 		{
 			m_rb = GetComponent<Rigidbody>();
-			m_rb.velocity = transform.forward * m_speed;
+			Movement();
 		}
-        protected override void Move()
-        {
-        }
-    }
+	}
 }
