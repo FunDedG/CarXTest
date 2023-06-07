@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,23 +10,41 @@ namespace TestJob
 		[SerializeField] private GameObject cannon;
         private RotationComponent m_rotationComponent;
         private LeadCalculationComponent m_leadCalculationComponent;
+		private InputComponent m_inputComponent;
+		private bool m_isBallistic = false;
 		
 
         protected override void Start()
         {
             base.Start();
-            m_rotationComponent = GetComponentInChildren<RotationComponent>();
+			m_inputComponent = GetComponent<InputComponent>();
+			m_rotationComponent = GetComponentInChildren<RotationComponent>();
             m_leadCalculationComponent = GetComponent<LeadCalculationComponent>();
             m_rotationComponent.Init(towerData, cannon);
-        }
+			m_inputComponent.onChangeMode += ChangeMode;
+		}
 		protected override void Update()
         {
 			base.Update();
 			RotateTower();
         }
+
+		private void ChangeMode()
+		{
+			m_isBallistic = !m_isBallistic;
+			if(m_isBallistic)
+			{
+				m_attackComponent.GetProjectilePrefab(projectilePrefab[1]);
+			}
+			else
+			{
+				m_attackComponent.GetProjectilePrefab(projectilePrefab[0]);
+			}
+		}
         private void RotateTower()
         {
-            if (m_searchEnemyComponent.GetTarget())
+			float angleRotation;
+			if (m_searchEnemyComponent.GetTarget())
             {
                 Vector3 predictedPosition = m_leadCalculationComponent.PredictQuadratic(
                     projectilePosition.transform.position,
@@ -33,12 +52,24 @@ namespace TestJob
                     m_searchEnemyComponent.GetTarget().GetComponent<Rigidbody>().velocity,
                     towerData.projectileSpeed
                 );
-                m_rotationComponent.Rotate(predictedPosition);
+				if (m_isBallistic)
+				{
+					angleRotation = m_leadCalculationComponent.AngleBallisticCalculate(predictedPosition, towerData.projectileSpeed);
+				}
+				else
+					angleRotation = m_leadCalculationComponent.AngleCalculate(predictedPosition);
+				
+				m_rotationComponent.RotateVertical(angleRotation);
+				m_rotationComponent.RotateHorizontal(predictedPosition);
             }
 			else
 			{
 				m_rotationComponent.ResetRotation();
 			}
         }
+		private void OnDisable()
+		{
+			m_inputComponent.onChangeMode -= ChangeMode;
+		}
     }
 }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace TestJob
 {
-	public class CannonProjectile : ProjectileBehavior
+    public class CannonBallisticProjectile : ProjectileBehavior
 	{
 		protected override void Start()
 		{

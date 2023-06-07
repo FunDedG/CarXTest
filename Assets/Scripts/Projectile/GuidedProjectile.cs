@@ -5,18 +5,22 @@ namespace TestJob
 	{
 		private GameObject m_target;
 
-		private void Start()
-		{
-			Destroy(gameObject, m_lifeTime);
-		}
-
 		public override void Init(float speed, float damage, float lifeTime, GameObject target)
         {
 			base.Init(speed, damage, lifeTime, target);
 			m_target = target;
 		}
 
-		protected override void Move()
+		protected override void Start()
+		{
+			Destroy(gameObject, m_lifeTime);
+		}
+
+		protected override void Update()
+		{
+			Movement();
+		}
+		protected override void Movement()
 		{
 			if (m_target == null)
 			{
