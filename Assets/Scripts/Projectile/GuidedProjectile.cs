@@ -19,6 +19,11 @@ namespace TestJob
 		protected override void Update()
 		{
 			Movement();
+			
+			if (m_target != null && !m_target.activeSelf)
+			{
+				Destroy(gameObject);
+			}
 		}
 		protected override void Movement()
 		{

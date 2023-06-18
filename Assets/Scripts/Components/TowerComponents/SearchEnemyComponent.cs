@@ -62,6 +62,12 @@ namespace TestJob
 				return null;
 			}
 
+			if (m_lastTarget != null && !m_lastTarget.activeSelf)
+			{
+				m_enemiesInRange.Remove(m_lastTarget);
+				m_lastTarget = null;
+			}
+
 			if (m_lastTarget != null)
 			{
 				float sqrDistanceToLastTarget = (m_lastTarget.transform.position - positionTower).sqrMagnitude;
@@ -74,12 +80,6 @@ namespace TestJob
 					m_enemiesInRange.Remove(m_lastTarget);
 					m_lastTarget = null;
 				}
-			}
-			
-			if (m_lastTarget != null && !m_lastTarget.activeSelf)
-			{
-				m_enemiesInRange.Remove(m_lastTarget);
-				m_lastTarget = null;
 			}
 
 			foreach (GameObject enemy in m_enemiesInRange)
