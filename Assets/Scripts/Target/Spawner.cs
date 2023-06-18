@@ -20,7 +20,7 @@ namespace TestJob
 
 			for (int i = 0; i < m_enemyPrefabs.Count; i++)
 			{
-				ObjectPoolManager<EnemyBehavior> enemyPool = new ObjectPoolManager<EnemyBehavior>(m_enemyPrefabs[i], m_rangePool, m_enemyContainers[i]);
+				ObjectPoolManager<EnemyBehavior> enemyPool = new (m_enemyPrefabs[i], m_rangePool, m_enemyContainers[i]);
 				m_enemyPools.Add(enemyPool);
 			}
 		}
@@ -56,5 +56,4 @@ namespace TestJob
 			m_enemyPools[m_enemyIndex].ReturnObject(enemyBehavior);
 		}
 	}
-
 }
