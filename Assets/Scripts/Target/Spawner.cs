@@ -1,19 +1,28 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 namespace TestJob
 {
 	public class Spawner : MonoBehaviour
 	{
-		[SerializeField] private EnemyBehavior m_prefabEnemy;
+		[SerializeField] private List<EnemyBehavior> m_enemyPrefabs;
+		[SerializeField] private List<Transform> m_enemyContainers;
 		[SerializeField] private float m_interval = 3;
 		[SerializeField] private Transform m_moveTarget;
-		[SerializeField] private Transform m_container;
+		[SerializeField] private int m_rangePool;
 		private float m_lastSpawn = -1;
+		private int m_enemyIndex;
 
-		private ObjectPoolManager<EnemyBehavior> m_enemyPool;
+		private List<ObjectPoolManager<EnemyBehavior>> m_enemyPools;
 
 		private void Start()
 		{
-			m_enemyPool = new ObjectPoolManager<EnemyBehavior>(m_prefabEnemy, 10, m_container);
+			m_enemyPools = new List<ObjectPoolManager<EnemyBehavior>>();
+
+			for (int i = 0; i < m_enemyPrefabs.Count; i++)
+			{
+				ObjectPoolManager<EnemyBehavior> enemyPool = new ObjectPoolManager<EnemyBehavior>(m_enemyPrefabs[i], m_rangePool, m_enemyContainers[i]);
+				m_enemyPools.Add(enemyPool);
+			}
 		}
 
 		private void Update()
@@ -24,24 +33,28 @@ namespace TestJob
 				m_lastSpawn = Time.time;
 			}
 		}
+
 		private void Spawn()
 		{
-			EnemyBehavior enemy = m_enemyPool.GetObject();
+			int randomEnemyIndex = Random.Range(0, m_enemyPrefabs.Count);
+			m_enemyIndex = randomEnemyIndex;
+			EnemyBehavior enemy = m_enemyPools[randomEnemyIndex].GetObject();
 			enemy.transform.position = transform.position;
-			HealthComponent death = enemy.gameObject.GetComponent<HealthComponent>();
-			death.onDeath += Remove;
-
 			var enemyBehavior = enemy.GetComponent<EnemyBehavior>();
 			enemyBehavior.Init(m_moveTarget);
+
+			HealthComponent death = enemy.gameObject.GetComponent<HealthComponent>();
+			death.onDeath += Remove;
 		}
 
 		private void Remove(GameObject gameObject)
 		{
-			HealthComponent death = gameObject.gameObject.GetComponent<HealthComponent>();
+			HealthComponent death = gameObject.GetComponent<HealthComponent>();
 			death.onDeath -= Remove;
 
 			var enemyBehavior = gameObject.GetComponent<EnemyBehavior>();
-			m_enemyPool.ReturnObject(enemyBehavior);
+			m_enemyPools[m_enemyIndex].ReturnObject(enemyBehavior);
 		}
 	}
+
 }
