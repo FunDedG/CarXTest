@@ -37,7 +37,7 @@ namespace TestJob
 			{
 				newObject.transform.SetParent(m_container);
 			}
-			
+
 			m_objectPool.Enqueue(newObject);
 		}
 

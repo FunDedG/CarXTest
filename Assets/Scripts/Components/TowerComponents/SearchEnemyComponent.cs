@@ -30,6 +30,7 @@ namespace TestJob
 			if (other.CompareTag("Enemy"))
 			{	
 				HealthComponent death = other.gameObject.GetComponent<HealthComponent>();
+				//death.InvokeAction();
 				death.onDeath -= RemoveFromList;
 				m_enemiesInRange.Remove(other.gameObject);
 				if (m_enemiesInRange.Count == 0)
@@ -68,6 +69,17 @@ namespace TestJob
 				{
 					return m_lastTarget;
 				}
+				else
+				{
+					m_enemiesInRange.Remove(m_lastTarget);
+					m_lastTarget = null;
+				}
+			}
+			
+			if (m_lastTarget != null && !m_lastTarget.activeSelf)
+			{
+				m_enemiesInRange.Remove(m_lastTarget);
+				m_lastTarget = null;
 			}
 
 			foreach (GameObject enemy in m_enemiesInRange)
@@ -84,6 +96,9 @@ namespace TestJob
 					}
 				}
 			}
+
+			
+
 			return m_lastTarget;
 		}
 	}

@@ -40,7 +40,7 @@ namespace TestJob
 			HealthComponent death = gameObject.gameObject.GetComponent<HealthComponent>();
 			death.onDeath -= Remove;
 
-			var enemyBehavior = death.GetComponent<EnemyBehavior>();
+			var enemyBehavior = gameObject.GetComponent<EnemyBehavior>();
 			m_enemyPool.ReturnObject(enemyBehavior);
 		}
 	}
