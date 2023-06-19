@@ -11,25 +11,21 @@ namespace TestJob
 			m_target = target;
 		}
 
-		protected override void Start()
-		{
-			Destroy(gameObject, m_lifeTime);
-		}
-
 		protected override void Update()
 		{
+			base.Update();
 			Movement();
 			
 			if (m_target != null && !m_target.activeSelf)
 			{
-				Destroy(gameObject);
+				InvokeProjectileAction();
 			}
 		}
 		protected override void Movement()
 		{
 			if (m_target == null)
 			{
-				Destroy(gameObject);
+				InvokeProjectileAction();
 				return;
 			}
 

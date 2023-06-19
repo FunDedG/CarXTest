@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,16 @@ namespace TestJob
         protected float m_speed;
         protected float m_damage;
         protected float m_lifeTime;
+		private float m_spawnTime;
+		public event Action<GameObject> onProjectileDeath;
 
-        public virtual void Init(float speed, float damage, float lifeTime, GameObject target)
+		public virtual void Init(float speed, float damage, float lifeTime, GameObject target)
         {
             m_speed = speed;
             m_damage = damage;
             m_lifeTime = lifeTime;
-        }
+			m_spawnTime = Time.time;
+		}
 
         protected virtual void OnCollisionEnter(Collision other)
         {
@@ -24,15 +28,26 @@ namespace TestJob
             {
                 health.TakeDamage(m_damage);
             }
-            Destroy(gameObject);
-        }
+			InvokeProjectileAction();
+		}
 
 		protected virtual void Movement()
         {
             m_rb.velocity = transform.forward * m_speed;
         }
 
-        protected virtual void Update() { }
+		public void InvokeProjectileAction()
+		{
+			onProjectileDeath?.Invoke(gameObject);
+		}
+
+        protected virtual void Update()
+		{
+			if (Time.time - m_spawnTime >= m_lifeTime)
+			{
+				InvokeProjectileAction();
+			}
+		}
 		protected virtual void Start() { }
     }
 }
