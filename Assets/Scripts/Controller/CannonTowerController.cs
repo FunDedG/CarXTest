@@ -34,11 +34,11 @@ namespace TestJob
 			m_isBallistic = !m_isBallistic;
 			if(m_isBallistic)
 			{
-				m_attackComponent.GetProjectilePrefab(projectilePrefab[1]);
+				m_attackComponent.ChangeProjectile(1);
 			}
 			else
 			{
-				m_attackComponent.GetProjectilePrefab(projectilePrefab[0]);
+				m_attackComponent.ChangeProjectile(0);
 			}
 		}
         private void RotateTower()

@@ -9,20 +9,31 @@ namespace TestJob
     {
 		public event Action<GameObject> onDeath;
 		private float m_health;
-		
+		private float m_currentHealth;
+
 		public void Init(EnemyData enemyData)
 		{
 			m_health = enemyData.health;
+			m_currentHealth = m_health;
 		}
 
 		public void TakeDamage(float damage)
 		{
-			m_health -= damage;
-        	if(m_health <= 0)
+			m_currentHealth -= damage;
+        	if(m_currentHealth <= 0)
         	{
-				onDeath?.Invoke(gameObject);
-				Destroy(gameObject);
+				InvokeAction();
 			}
+		}
+
+		public void InvokeAction()
+		{
+			onDeath?.Invoke(gameObject);
+		}
+
+		private void OnEnable()
+		{
+			m_currentHealth = m_health;
 		}
     }
 }
