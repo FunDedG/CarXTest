@@ -47,18 +47,18 @@ namespace TestJob
 			projectile.transform.position = m_projectileStartPosition.transform.position;
 			projectile.transform.rotation = m_projectileStartPosition.transform.rotation;
 
-			projectile.Init(m_towerData.projectileSpeed, m_towerData.damage, m_towerData.lifeTime, target);
+			projectile.Init(m_towerData.projectileSpeed, m_towerData.damage, m_towerData.lifeTime, indexProjectile, target);
 			projectile.onProjectileDeath += RemoveProjectile;
 
 			m_lastAttackTime = Time.time;
 		}
 
-		private void RemoveProjectile(GameObject gameObject)
+		private void RemoveProjectile(GameObject gameObject, int id)
 		{
 			ProjectileBehavior projectile = gameObject.GetComponent<ProjectileBehavior>();
 			projectile.onProjectileDeath -= RemoveProjectile;
 
-			m_projectilePools[indexProjectile].ReturnObject(projectile);
+			m_projectilePools[id].ReturnObject(projectile);
 		}
 	}
 }

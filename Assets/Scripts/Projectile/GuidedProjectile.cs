@@ -5,9 +5,9 @@ namespace TestJob
 	{
 		private GameObject m_target;
 
-		public override void Init(float speed, float damage, float lifeTime, GameObject target)
+		public override void Init(float speed, float damage, float lifeTime, int idProjectile, GameObject target)
         {
-			base.Init(speed, damage, lifeTime, target);
+			base.Init(speed, damage, lifeTime, idProjectile, target);
 			m_target = target;
 		}
 
