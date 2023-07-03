@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace TestJob
 {
@@ -7,7 +8,8 @@ namespace TestJob
 	{
 		[SerializeField] protected TowerData towerData;
 		[SerializeField] protected GameObject projectilePosition;
-		[SerializeField] protected List<ProjectileBehavior> projectilePrefabs;
+		//[SerializeField] protected List<ProjectileBehavior> projectilePrefabs;
+		[SerializeField] protected List<AssetReferenceGameObject> projectilePrefabs;
 		protected AttackComponent m_attackComponent;
 		protected SearchEnemyComponent m_searchEnemyComponent;
 		protected SphereCollider m_sphereCollider;
@@ -19,7 +21,6 @@ namespace TestJob
 			m_sphereCollider = GetComponent<SphereCollider>();
 			m_sphereCollider.radius = towerData.range;
 			m_attackComponent.Init(towerData, projectilePosition, projectilePrefabs);
-			//m_attackComponent.GetProjectilePrefab(projectilePrefab);
 			m_searchEnemyComponent.Init(towerData);
 		}
 		protected virtual void Attack()

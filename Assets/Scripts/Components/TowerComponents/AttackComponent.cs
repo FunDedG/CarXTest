@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace TestJob
 {
@@ -8,7 +11,6 @@ namespace TestJob
 	{
 		[SerializeField] private int m_sizePool;
 		[SerializeField] private List<Transform> m_projectileContainers;
-		private List<ProjectileBehavior> m_projectilePrefabs;
 		private float m_lastAttackTime;
 		private TowerData m_towerData;
 		private GameObject m_projectileStartPosition;
@@ -16,19 +18,23 @@ namespace TestJob
 
 		private List<ObjectPoolManager<ProjectileBehavior>> m_projectilePools;
 
-		public void Init(TowerData towerData, GameObject projectileStartPosition, List<ProjectileBehavior> projectilePrefabs)
+		public async void Init(TowerData towerData, GameObject projectileStartPosition, List<AssetReferenceGameObject> projectilePrefabs)
 		{
 			m_towerData = towerData;
 			m_lastAttackTime = m_towerData.shootInterval;
 			m_projectileStartPosition = projectileStartPosition;
-			m_projectilePrefabs = projectilePrefabs;
 
 			m_projectilePools = new List<ObjectPoolManager<ProjectileBehavior>>();
 
-			for (int i = 0; i < m_projectilePrefabs.Count; i++)
+			for (int i = 0; i < projectilePrefabs.Count; i++)
 			{
-				ObjectPoolManager<ProjectileBehavior> projectilePool = new (m_projectilePrefabs[i], m_sizePool, m_projectileContainers[i]);
-				m_projectilePools.Add(projectilePool);
+				GameObject prefab = await LoadProjectileAsync(projectilePrefabs[i]);
+				if (prefab != null)
+				{
+					ProjectileBehavior projectile = prefab.GetComponent<ProjectileBehavior>();
+					ObjectPoolManager<ProjectileBehavior> projectilePool = new (projectile, m_sizePool, m_projectileContainers[i]);
+					m_projectilePools.Add(projectilePool);
+				}
 			}
 		}
 
@@ -59,6 +65,21 @@ namespace TestJob
 			projectile.onProjectileDeath -= RemoveProjectile;
 
 			m_projectilePools[id].ReturnObject(projectile);
+		}
+
+		private async Task<GameObject> LoadProjectileAsync(AssetReferenceGameObject projectilePrefab)
+		{
+			var prefabHandle = projectilePrefab.LoadAssetAsync<GameObject>();
+			await prefabHandle.Task;
+			
+			if (prefabHandle.Status == AsyncOperationStatus.Succeeded)
+			{
+				return prefabHandle.Result;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }

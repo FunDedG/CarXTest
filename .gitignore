@@ -60,3 +60,7 @@ crashlytics-build.properties
 
 UserSettings
 *.csproj
+Assets/Samples
+Assets/Samples.meta
+Assets/AddressableAssetsData
+Assets/AddressableAssetsData.meta

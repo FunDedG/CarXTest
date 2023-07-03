@@ -16,10 +16,10 @@ namespace TestJob
 
         protected override void Start()
         {
-            base.Start();
 			m_inputComponent = GetComponent<InputComponent>();
 			m_rotationComponent = GetComponentInChildren<RotationComponent>();
             m_leadCalculationComponent = GetComponent<LeadCalculationComponent>();
+            base.Start();
             m_rotationComponent.Init(towerData, cannon);
 			m_inputComponent.onChangeMode += ChangeMode;
 		}
